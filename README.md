@@ -7,19 +7,19 @@ Traceroute is a tool that can be used to track the route that a packet takes fro
 Here is a basic implementation of traceroute in Go:
 
 Copy code
-`
-package main
 
-import (
-    "fmt"
-    "net"
-    "os"
-    "time"
-)
+   ``` package main
 
-func main() {
-    target := os.Args[1]
-    fmt.Println("Tracerouting", target)
+    import (
+        "fmt"
+        "net"
+        "os"
+        "time"
+    )
+
+    func main() {
+        target := os.Args[1]
+        fmt.Println("Tracerouting", target)
 
     for i := 1; i <= 30; i++ {
         conn, err := net.Dial("udp", target+":33434")
@@ -46,5 +46,7 @@ func main() {
 
         fmt.Printf("%d: %s\n", i, addr.String())
     }
-}`
+}
+
+```
 This program takes a single command-line argument, which is the target host to trace the route to. It then repeatedly sends UDP packets to the target with incrementing TTL values, and waits for a reply. The address of the host that replied is printed out along with the TTL value that was used.
